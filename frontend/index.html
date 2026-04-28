@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgentGrid | Decentralized Multi-Agent System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="main-container">
+    <div class="left-panel">
+      <div class="panel-section">
+        <label for="goal-input">SYSTEM GOAL</label>
+        <input type="text" id="goal-input" placeholder="Enter agent goal...">
+      </div>
+      <div class="panel-section">
+        <h3>PLANNER TASK BREAKDOWN</h3>
+        <div class="task-list">
+          <div class="task-item">1. Decompose user goal into sub-tasks</div>
+          <div class="task-item">2. Assign research tasks to Researcher</div>
+          <div class="task-item">3. Validate outputs via Critic agent</div>
+          <div class="task-item">4. Execute final task via Executor</div>
+          <div class="task-item">5. Store results in decentralized memory</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="center-graph">
+      <svg id="agent-graph">
+        <defs>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <g id="bg-lines"></g>
+        <g id="connections"></g>
+        <g id="nodes"></g>
+      </svg>
+    </div>
+
+    <div class="right-panel">
+      <h3>AGENT COMMUNICATION LOGS</h3>
+      <div class="log-list" id="log-list">
+        <div class="log-item">
+          <span class="agent">[planner.eth]</span> → Decomposing user goal into executable sub-tasks
+        </div>
+        <div class="log-item">
+          <span class="agent">[researcher.eth]</span> → Gathering sources for sub-task 2
+        </div>
+        <div class="log-item active">
+          <span class="agent">[critic.eth]</span> → Validating research output for accuracy
+        </div>
+        <div class="log-item">
+          <span class="agent">[executor.eth]</span> → Preparing to execute sub-task 4
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="bottom-strip">
+    <div class="memory-feed" id="memory-feed">
+      <span class="memory-item">Stored in 0G</span>
+      <span class="memory-item">Memory retrieved</span>
+      <span class="memory-item">Stored in 0G</span>
+      <span class="memory-item">Memory retrieved</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
