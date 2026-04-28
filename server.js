@@ -22,6 +22,12 @@ app.get('/api/users', (req, res) => {
 
 app.post('/api/users', (req, res) => {
   const { name, email } = req.body
+  if (!name || !email) {
+    return res.status(400).json({ error: 'Name and email are required' })
+  }
+  if (users.some(u => u.email === email)) {
+    return res.status(409).json({ error: 'Email already exists' })
+  }
   const user = { id: nextId++, name, email }
   users.push(user)
   res.status(201).json(user)
@@ -43,6 +49,11 @@ app.delete('/api/users/:id', (req, res) => {
   if (index === -1) return res.status(404).json({ error: 'User not found' })
   users.splice(index, 1)
   res.status(204).send()
+})
+
+app.use((err, req, res, next) => {
+  console.error(err)
+  res.status(500).json({ error: 'Internal server error' })
 })
 
 app.listen(PORT, () => {
